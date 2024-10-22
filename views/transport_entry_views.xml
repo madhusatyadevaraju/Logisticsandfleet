@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+     <record id="view_transport_entry_tree" model="ir.ui.view">
+        <field name="name">logistics.transport.entry</field>
+        <field name="model">transport.entry</field>
+        <field name="arch" type="xml">
+            <tree string="Transport Entries">
+                <field name="tracking_number"/>
+                <field name="transporter_id"/>
+            </tree>
+        </field>
+    </record>
+
+     <record id="view_transport_entry_form" model="ir.ui.view">
+        <field name="name">logistics.transport.entry</field>
+        <field name="model">transport.entry</field>
+        <field name="arch" type="xml">
+            <form string="Transport Entries">
+                <header>
+                    <button name="action_start" type="object" string="Start" class="oe_highlight" invisible="state!='start' and state!='waiting'"/>
+                    <button name="action_waiting" type="object" string="Waiting" class="oe_highlight" invisible="state!='start'"/>
+                    <button name="action_delivery" type="object" string="Delivery" class="oe_highlight" invisible="state!='in-progress'"/>
+                    <button name="action_cancel" type="object" string="Cancel" class="oe_highlight"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="start,waiting,in-progress,delivery" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <h1><field name="tracking_number"/></h1>
+                    <group>
+                        <group>
+                            <field name="customer_name"/>
+                            <field name="stock_picking_id"/>
+                            <field name="pickup_date"/>
+                            <field name="vehicle_id"/>
+<!--                            <field name="driver_id"/>-->
+                        </group>
+                        <group>
+                            <field name="transporter_id"/>
+                            <field name="lr_number"/>
+                            <field name="no_of_parcels"/>
+                            <field name="shipment_route"/>
+<!--                            <field name="transport_ids"/>-->
+                        </group>
+                    </group>
+                     <notebook>
+                        <page string="Location Details">
+                            <field name="location_details_ids">
+                                <tree string="Location Details" editable="bottom">
+<!--                                    <field name="route_id"/>-->
+                                    <field name="source_location"/>
+                                    <field name="destination_location"/>
+                                    <field name="distance"/>
+                                    <field name="transport_charges"/>
+                                    <field name="time_hours"/>
+                                    <field name="start_time"/>
+                                    <field name="end_time"/>
+                                    <field name="tracking_number"/>
+                                    <field name="state"/>
+                                </tree>
+                                <form string="Location Detail">
+                                    <group>
+<!--                                        <field name="route_id"/>-->
+                                        <field name="source_location"/>
+                                        <field name="destination_location"/>
+                                        <field name="distance"/>
+                                        <field name="transport_charges"/>
+                                        <field name="time_hours"/>
+                                        <field name="start_time"/>
+                                        <field name="end_time"/>
+                                        <field name="tracking_number"/>
+                                        <field name="state"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_transport_entry">
+        <field name="name">Transport Entry</field>
+        <field name="res_model">transport.entry</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

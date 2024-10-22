@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+     <record id="view_transport_location_tree" model="ir.ui.view">
+        <field name="name">logistics.transport.location</field>
+        <field name="model">transport.location</field>
+        <field name="arch" type="xml">
+            <tree string="Location">
+                <field name="location"/>
+            </tree>
+        </field>
+    </record>
+
+
+<record model="ir.actions.act_window" id="action_transport_location">
+        <field name="name">Transport Location</field>
+        <field name="res_model">transport.location</field>
+        <field name="view_mode">tree,form</field>
+</record>
+</odoo>

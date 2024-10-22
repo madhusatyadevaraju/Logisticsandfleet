@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_sale_order_form_inherit_transport_info" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit.transport_info</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="shipment_route"/>
+                    <field name="transporter_info"/>
+
+
+                    <!-- Add the Shipment Details smart button -->
+                    <button name="action_view_shipment_details" type="object" string="Shipment Details"
+                            class="btn-secondary" icon="fa-truck"/>
+                </xpath>
+                <xpath expr="//sheet//page[@name='other_information']" position="after">
+
+                <page string="Transporter Details">
+                    <group>
+                        <group>
+                        <field name="vehicle_id"/>
+<!--                        <field name="driver_id"/>-->
+                        <field name="shipment_type"/>
+                        </group>
+                        <group>
+                        <field name="pickup_date"/>
+<!--                        <field name="shipment_route"/>-->
+                        <field name="arrived_date"/>
+                        <field name="is_shipment_details_added"/>
+                        </group>
+                    </group>
+                </page>
+                </xpath>
+                <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+
+                    <button name="action_view_shipments"
+                            type="object"
+                            string="Shipment"
+                            icon="fa-truck"
+                            class="oe_stat_button">
+                        <field name="shipment_count" widget="statinfo"/>
+                    </button>
+
+
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

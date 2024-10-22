@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+
+    <record model="ir.ui.view" id="view_shipment_type_tree">
+        <field name="name">Shipment.type.tree</field>
+        <field name="model">shipment.types</field>
+        <field name="arch" type="xml">
+            <tree string="Shipment Type">
+                <field name="shipment_name"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="action_transport_shipment">
+        <field name="name">Shipment Types</field>
+        <field name="res_model">shipment.types</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_transport_location,access_transport_location,model_transport_location,base.group_user,1,1,1,1
+access_transport_transporters,access_transport_transporters,model_transport_transporters,base.group_user,1,1,1,1
+access_transport_routes,access_transport_routes,model_transport_routes,base.group_user,1,1,1,1
+access_transport_location_details,access_transport_location_details,model_transport_location_details,base.group_user,1,1,1,1
+access_shipment_types,access_shipment_types,model_shipment_types,base.group_user,1,1,1,1
+access_transport_vehicle,access_transport_vehicle,model_transport_vehicle,base.group_user,1,1,1,1
+access_sale_order,access_sale_order,model_sale_order,base.group_user,1,1,1,1
+access_shipment_details_wizard,access_shipment_details_wizard,model_shipment_details_wizard,base.group_user,1,1,1,1
+access_stock_picking,access_stock_picking,model_stock_picking,base.group_user,1,1,1,1
+access_transport_entry,access_transport_entry,model_transport_entry,base.group_user,1,1,1,1

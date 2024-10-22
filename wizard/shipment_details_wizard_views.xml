@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+<record id="view_shipment_details_wizard" model="ir.ui.view">
+    <field name="name">shipment.details.wizard.form</field>
+    <field name="model">shipment.details.wizard</field>
+    <field name="arch" type="xml">
+        <form string="Shipment Details">
+            <group>
+                <group>
+<!--                <field name="transporter_id"/>-->
+                <field name="vehicle_id"/>
+                <field name="shipment_type"/>
+
+                </group>
+                <group>
+<!--                <field name="driver_id"/>-->
+<!--                <field name="shipment_route"/>-->
+                     <field name="pickup_date"/>
+                <field name="arrived_date"/>
+                </group>
+            </group>
+            <footer>
+                <button string="Create Shipment Details" type="object" name="action_confirm" class="btn-primary"/>
+                <button string="Cancel" class="btn-secondary" special="cancel"/>
+            </footer>
+        </form>
+    </field>
+</record>
+</odoo>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_transporter_kanban" model="ir.ui.view">
+        <field name="name">transport.transporters.kanban</field>
+        <field name="model">transport.transporters</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="contact_person"/>
+                <field name="mobile"/>
+                <field name="email"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                            <div class="o_kanban_image d-none d-md-block"
+                                 t-attf-style="background-image:url('#{kanban_image('transport.transporters','logo',record.id.raw_value,placeholder)}')">
+                            </div>
+                            <div class="oe_kanban_details">
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                                <div>Contact Person:
+                                    <field name="contact_person"/>
+                                </div>
+                                <div>Mobile:
+                                    <field name="mobile"/>
+                                </div>
+                                <div>Email:
+                                    <field name="email"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <record id="view_transport_transporters_tree" model="ir.ui.view">
+        <field name="name">transport.transporter.tree</field>
+        <field name="model">transport.transporters</field>
+        <field name="arch" type="xml">
+            <tree string="Transporters">
+                <field name="name"/>
+                <field name="contact_person"/>
+                <field name="mobile"/>
+                <field name="email"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_transport_transporters_form" model="ir.ui.view">
+        <field name="name">transport.transporter.form</field>
+        <field name="model">transport.transporters</field>
+        <field name="arch" type="xml">
+            <form string="Transporters">
+
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_stock_deliveries"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-truck">
+                            <field name="delivery_count" widget="statinfo" string="Deliveries"/>
+                        </button>
+                    </div>
+                    <field name="logo" class="oe_avatar" widget="image"/>
+                    <group>
+                        <strong style="font-size:30px;"><field name="name" required="1"/></strong>
+                        <group>
+                            <field name="contact_person"/>
+                            <field name="mobile"/>
+                            <field name="email"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Contact &amp; Address">
+                            <group>
+                                <group>
+                                    <!-- First row for street and street2 -->
+                                    <field name="street" placeholder="Street"/>
+                                    <field name="street2" placeholder="Street 2"/>
+                                    <field name="zip" placeholder="ZIP"/>
+                                </group>
+                                <!-- Second row for city, state, zip -->
+                                <group>
+                                    <field name="city" placeholder="City"/>
+                                    <field name="state_id" placeholder="State"/>
+                                    <!-- Country field -->
+                                    <field name="country_id" placeholder="Country"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Transporter Details">
+                            <group>
+                                <group>
+                                    <field name="transporter"/>
+<!--                                    <field name="shipment_form"/>-->
+                                </group>
+                                <group>
+                                    <field name="driver"/>
+                                    <field name="vehicle_id"/>
+                                    <field name="routes"/>
+                                </group>
+                            </group>
+
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_transport_transporters" model="ir.actions.act_window">
+        <field name="name">Transporters</field>
+        <field name="res_model">transport.transporters</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                create a new patient
+            </p>
+        </field>
+    </record>
+</odoo>

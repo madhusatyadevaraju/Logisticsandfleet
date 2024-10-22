@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <menuitem id="menu_logistics_fleet_management"
+              name="Logistics"
+    />
+    <menuitem id="menu_transport_transporters"
+              name="Transporters"
+              sequence="1"
+              parent="menu_logistics_fleet_management"
+              action="action_transport_transporters"
+    />
+    <menuitem id="menu_configuration"
+              name="Configuration"
+              sequence="3"
+              parent="menu_logistics_fleet_management"
+    />
+
+     <menuitem id="menu_transport_location"
+              name="Transport Location"
+              parent="menu_configuration"
+              action="action_transport_location"
+     />
+     <menuitem id="menu_transport_routes"
+              name="Transport Routes"
+              parent="menu_configuration"
+              action="action_transport_routes"
+     />
+     <menuitem id="menu_transport_shipment_types"
+              name="Shipment Types"
+              parent="menu_configuration"
+              action="action_transport_shipment"
+     />
+      <menuitem id="menu_transport_vehicles"
+              name="Vehicles"
+              parent="menu_configuration"
+              action="action_transport_vehicles"
+     />
+      <menuitem id="menu_transport_entry"
+              name="Transport Entry"
+               sequence="2"
+              parent="menu_logistics_fleet_management"
+              action="action_transport_entry"
+     />
+
+</odoo>
