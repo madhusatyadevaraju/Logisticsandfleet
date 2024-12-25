@@ -1,7 +1,7 @@
 from importlib.resources import _
 
 from odoo import api, fields, models
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 
 
 class TransportRoutes(models.Model):
@@ -28,9 +28,69 @@ class TransportRoutes(models.Model):
             else:
                 record.name = 'No Locations Defined'
 
+    # In your model:
     @api.constrains('location_ids')
     def _check_single_route_per_transporter(self):
         for record in self:
             if len(record.location_ids) > 1:
-                raise ValidationError(
-                    _("Only one route can be added for the transporter '%s'.") % record.transporter_id.name)
+                raise UserError(
+                    _("Only one route can be added for the transporter '%s'.") % record.transporter_id.name
+                )
+
+
+    #
+    # // / **
+    #
+    # @odoo - module ** /
+    #
+    # //
+    # // import
+    # {Dialog}
+    # from
+    # "@web/core/dialog/dialog";
+    # // import
+    # {patch}
+    # from
+    # "@web/core/utils/patch";
+    # // import
+    # {_t}
+    # from
+    # "@web/core/l10n/translation";
+    # //
+    # // // Patch
+    # the
+    # Dialog
+    # to
+    # customize
+    # error
+    # titles
+    # // patch(Dialog.prototype, {
+    #          // setup()
+    # {
+    # // // Call
+    # the
+    # original
+    # setup
+    # method
+    # // this._super(...
+    # arguments);
+    # //
+    # // // Ensure
+    # `props` is defined
+    # before
+    # accessing
+    # it
+    # // if (this.props & & this.props.title)
+    # {
+    # // // Change
+    # the
+    # title if it
+    # 's "Invalid Operation" or "ValidationError"
+    # // if (this.props.title === _t("Invalid Operation")) {
+    #                                                      // this.props.title = _t("Error");
+    # //} else if (this.props.title === _t("ValidationError")) {
+    # // this.props.title = _t("User Error");
+    # //}
+    # //}
+    # //},
+    # //});

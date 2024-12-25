@@ -36,7 +36,7 @@ class StockPicking(models.Model):
             'pickup_date': self.pickup_date,
             # 'arrived_date': self.arrived_date,
             'tracking_number':self.tracking_number,
-            'customer_name':self.partner_id.name,
+            'customer_name':self.partner_id.id,
             'lr_number':self.lr_number,
             'no_of_parcels':self.no_of_parcels,
             'shipment_route':self.shipment_route.id,

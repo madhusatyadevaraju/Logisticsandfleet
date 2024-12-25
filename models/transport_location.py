@@ -22,6 +22,7 @@ class TransportLocationDetails(models.Model):
     time_hours=fields.Float(string="Time Taken")
     picking_id = fields.Many2one('stock.picking', string="Picking Reference")
     transport_id=fields.Many2one('transport.entry',string="Transport Entry")
+    demo_id=fields.Many2one('transport.entry')
 
     # Add fields some fields
     start_time=fields.Datetime(string="Start Time",default=False)

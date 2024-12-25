@@ -1,10 +1,14 @@
+
+import requests
 from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 
 class TransportEntry(models.Model):
     _name = "transport.entry"
+    _rec_name = "tracking_number"
 
-    customer_name=fields.Char(string="Customer Name")
+    customer_name=fields.Many2one('res.partner',string="Customer Name")
     stock_picking_id = fields.Many2one('stock.picking', string="Delivery Order", required=True)
     transporter_id = fields.Many2one('transport.transporters', string="Transported By")
 
@@ -22,10 +26,7 @@ class TransportEntry(models.Model):
     no_of_parcels = fields.Integer(string="No Of Parcels")
     shipment_route=fields.Many2one('transport.routes',string="Transport Route")
 
-    location_details_ids=fields.One2many(related='shipment_route.location_ids',string="Location Details",readonly=True)
-    # transport_ids=fields.Many2one('stock.picking',string="Transport Order")
-
-
+    location_details_ids=fields.One2many('transport.location.details','demo_id',string="Location Details",readonly=True)
 
 
     def action_start(self):
@@ -62,10 +63,26 @@ class TransportEntry(models.Model):
     def create(self, vals):
         """ Override create method to set default state 'start' for location details """
         record = super(TransportEntry, self).create(vals)
-        if record.location_details_ids:
-            for location in record.location_details_ids:
-                location.state = 'start'
+        # Fetch the related location details from the selected route
+        if record.shipment_route and record.shipment_route.location_ids:
+            # Create independent copies of location details for this transport entry
+            new_location_details = []
+            for location in record.shipment_route.location_ids:
+                new_location_details.append((0, 0, {
+                    'source_location': location.source_location.id,
+                    'destination_location': location.destination_location.id,
+                    'distance': location.distance,
+                    'transport_charges': location.transport_charges,
+                    'time_hours': location.time_hours,
+                    # 'start_time': location_detail.start_time,
+                    # 'end_time': location_detail.end_time,
+                    'tracking_number':location.tracking_number,
+                    'state': "start",
+                }))
+            # Now, update the transport entry record with the new location details
+            record.write({'location_details_ids': new_location_details})
         return record
+
 
     #The details from the transport entry ->transport.location.details populated into stock->transport.location.details
     def _populate_transport_location_details(self):
@@ -89,3 +106,8 @@ class TransportEntry(models.Model):
                     'state': location_detail.state,
 
                 })]
+
+
+
+
+

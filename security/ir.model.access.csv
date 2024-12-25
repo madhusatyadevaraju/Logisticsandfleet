@@ -9,3 +9,4 @@ access_sale_order,access_sale_order,model_sale_order,base.group_user,1,1,1,1
 access_shipment_details_wizard,access_shipment_details_wizard,model_shipment_details_wizard,base.group_user,1,1,1,1
 access_stock_picking,access_stock_picking,model_stock_picking,base.group_user,1,1,1,1
 access_transport_entry,access_transport_entry,model_transport_entry,base.group_user,1,1,1,1
+

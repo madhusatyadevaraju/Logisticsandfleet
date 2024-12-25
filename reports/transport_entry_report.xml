@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <data>
+        <record id="action_report_transport_entry" model="ir.actions.report">
+            <field name="name">Transport Entry</field>
+            <field name="model">transport.entry</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">logistics_fleet_management.report_transport_entry</field>
+            <field name="report_file">logistics_fleet_management.report_transport_entry</field>
+            <field name="binding_model_id" ref="model_transport_entry"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="stock_report_inherit" inherit_id="stock.report_delivery_document">
+        <xpath expr="//div[@class='page']//table[@class='table table-sm mt48']" position="after">
+           <table class="table table-sm" style= "margin-top: 50px;">
+               <thead>
+                   <tr style="background-color: #f2f2f2;">
+                       <th style="padding: 10px; text-align: left;">Transporter</th>
+                       <th style="padding: 10px; text-align: left;">LR Number</th>
+                       <th style="padding: 10px; text-align: left;">No Of Parcels</th>
+                   </tr>
+               </thead>
+               <tbody>
+                   <tr>
+                       <td style="padding: 10px;" t-esc="o.transporter_info.name"/>
+                       <td style="padding: 10px;" t-esc="o.lr_number"/>
+                       <td style="padding: 10px;" t-esc="o.no_of_parcels"/>
+                   </tr>
+               </tbody>
+           </table>
+        </xpath>
+    </template>
+</odoo>
